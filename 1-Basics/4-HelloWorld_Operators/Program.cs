@@ -1,83 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace HelloWorld
+namespace Coding.Exercise
 {
-    internal class Program
+    public class Exercise
     {
         static void Main(string[] args)
         {
-            int myInt = 5;
-            int mySecondInt = 10;
+            int myFirstValue = 7;
+            int mySecondValue = 5;
+            //Write Your Code Here
+            mySecondValue += myFirstValue;
+            myFirstValue -= mySecondValue;
+            myFirstValue *= mySecondValue;
 
-            Console.WriteLine(myInt.Equals(mySecondInt));
-            Console.WriteLine(myInt.Equals(mySecondInt / 2));
-
-            Console.WriteLine(myInt != mySecondInt);
-            Console.WriteLine(myInt == mySecondInt / 2);
-            Console.WriteLine(myInt != mySecondInt / 3);
-
-            Console.WriteLine(myInt >= mySecondInt);
-            Console.WriteLine(myInt >= mySecondInt / 2);
-            Console.WriteLine(myInt > mySecondInt);
-            Console.WriteLine(myInt > mySecondInt - 6);
-            Console.WriteLine(myInt <= mySecondInt);
-            Console.WriteLine(myInt < mySecondInt);
-
-            Console.WriteLine(5 > 10 && 5 < 10);
-
-
-            //Mathematical Operators
-
-
-            Console.WriteLine(myInt);
-
-            myInt++;
-
-            Console.WriteLine(myInt);
-
-            myInt += 7;
-
-            Console.WriteLine(myInt);
-
-            myInt -= 8;
-
-            Console.WriteLine(myInt);
-
-            Console.WriteLine(myInt * mySecondInt);
-
-            Console.WriteLine(mySecondInt / myInt);
-
-            Console.WriteLine(mySecondInt + myInt);
-
-            Console.WriteLine(myInt - mySecondInt);
-
-            Console.WriteLine(5 + 5 * 10);
-
-            Console.WriteLine((5 + 5) * 10);
-
-            Console.WriteLine(Math.Pow(5, 4));
-
-            Console.WriteLine(Math.Sqrt(25));
-
-            string myString = "test";
-
-            Console.WriteLine(myString);
-
-            myString += ". second part.";
-
-            Console.WriteLine(myString);
-
-            myString = myString + " \"third\\ part.";
-
-            Console.WriteLine(myString);
-
-            string[] myStringArr = myString.Split(". ");
-            Console.WriteLine(myStringArr[0]);
-            Console.WriteLine(myStringArr[1]);
-
-
-
-
+            Console.WriteLine(myFirstValue);
+            Console.WriteLine(mySecondValue);
+            Console.WriteLine(myFirstValue > mySecondValue);
+            
+            //Console.WriteLine(myFirstValue mySecondValue);
+            
+            //Write You Code Above This Line
         }
     }
 }

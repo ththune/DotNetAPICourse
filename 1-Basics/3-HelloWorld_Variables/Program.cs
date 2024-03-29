@@ -60,6 +60,7 @@ namespace HelloWorld
 
 
 
+
             string myString = "Hello World";
             // Console.WriteLine(myString);
             string myStringWithSymbols = "!@#$@^$%%^&(&%^*__)+%^@##$!@%123589071340698ughedfaoig137";
@@ -80,6 +81,7 @@ namespace HelloWorld
             // Console.WriteLine(myGroceryArray[2]);
 
             string[] mySecondGroceryArray = { "Apples", "Eggs" };
+            mySecondGroceryArray.Append("Milk");
 
             // mySecondGroceryArray[2] = ""; //Error
 
@@ -88,6 +90,11 @@ namespace HelloWorld
             // Console.WriteLine(mySecondGroceryArray[2]); //Error
 
             List<string> myGroceryList = new List<string>() { "Milk", "Cheese" };
+
+            List<string> testList = [];
+            testList.Add("a");
+            testList.Insert(0, "b");
+
 
             // Console.WriteLine(myGroceryList[0]);
             // Console.WriteLine(myGroceryList[1]);
@@ -98,9 +105,9 @@ namespace HelloWorld
 
             // Console.WriteLine(myGroceryList[2]);
 
-            IEnumerable<string> myGroceryIEnumerable =  myGroceryList;
+            IEnumerable<string> myGroceryIEnumerable = myGroceryList;
 
-            // Console.WriteLine(myGroceryIEnumerable.First());
+            Console.WriteLine(myGroceryIEnumerable.First());
 
             string[,] myTwoDimensionalArray = new string[,] {
                 { "Apples", "Eggs" },
