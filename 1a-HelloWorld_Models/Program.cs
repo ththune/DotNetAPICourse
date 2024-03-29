@@ -8,18 +8,6 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            IConfiguration config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            DataContextDapper dapper = new DataContextDapper(config);
-            DataContextEF entityFramework = new DataContextEF(config);
-
-
-            string sqlCommand = "SELECT GETDATE()";
-            DateTime rightNow = dapper.LoadDataSingle<DateTime>(sqlCommand);
-            Console.WriteLine(rightNow);
-
 
 
             Computer myComputer = new Computer()
@@ -31,9 +19,6 @@ namespace HelloWorld
                 Price = 943.87m,
                 VideoCard = "RTX 2060",
             };
-
-            entityFramework.Add(myComputer);
-            entityFramework.SaveChanges();
 
             string sql = $@"INSERT INTO TutorialAppSchema.Computer (
                 Motherboard,
@@ -51,68 +36,16 @@ namespace HelloWorld
                 '{myComputer.VideoCard}'
             )";
 
-            Console.WriteLine(sql);
+            //File.WriteAllText("log.txt", sql);
 
+            using StreamWriter openFile = new StreamWriter("log.txt", append: true);
+            openFile.WriteLine(sql);
+            openFile.Close();
 
-            bool result = dapper.ExecuteSql(sql);
+            String fileText = File.ReadAllText("log.txt");
+            Console.WriteLine(fileText);
 
-
-            string sqlSelect = @"
-            SELECT 
-                Computer.ComputerId,
-                Computer.Motherboard,
-                Computer.HasWifi,
-                Computer.HasLTE,
-                Computer.ReleaseDate,
-                Computer.Price,
-                Computer.VideoCard
-            FROM TutorialAppSchema.Computer";
-
-            IEnumerable<Computer> computers = dapper.LoadData<Computer>(sqlSelect);
-            foreach (Computer computer in computers)
-            {
-                Console.WriteLine($@"
-                {computer.ComputerId},
-                {computer.Motherboard},
-                {computer.HasWifi},
-                {computer.HasLTE},
-                {computer.ReleaseDate},
-                {computer.Price},
-                {computer.VideoCard}
-                ");
-            }
-
-            IEnumerable<Computer>? computersEf = entityFramework.Computer?.ToList<Computer>();
-            if (computersEf != null)
-            {
-                foreach (Computer computer in computersEf)
-                {
-                    Console.WriteLine($@"
-                {computer.ComputerId},
-                {computer.Motherboard},
-                {computer.HasWifi},
-                {computer.HasLTE},
-                {computer.ReleaseDate},
-                {computer.Price},
-                {computer.VideoCard}
-                ");
-                }
-            }
-
-            IEnumerable<Computer>? computersEfWithCPUCores = entityFramework.Computer?.Where(c => c.CPUCores != null).ToList<Computer>();
-
-            int noOfComputersWithCPUCores = computersEfWithCPUCores.Count();
-            Console.WriteLine($"Amount of computers with CPUCores: {noOfComputersWithCPUCores}");
-
-
-            //myComputer.HasWifi = false;
-
-            //Console.WriteLine(myComputer.Motherboard);
-            //Console.WriteLine(myComputer.HasWifi);
-            //Console.WriteLine(myComputer.ReleaseDate);
-            //Console.WriteLine(myComputer.VideoCard);
-
-
+            //Console.WriteLine(File.ReadAllText("log.txt"));
         }
     }
 }
