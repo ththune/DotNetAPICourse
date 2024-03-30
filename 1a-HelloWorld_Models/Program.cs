@@ -11,8 +11,30 @@
             });
 
             firstTask.Start();
+
+            Task secondTask = ConsoleAfterDelayAsync("Task 2", 150);
+
+            ConsoleAfterDelay("Delay", 75);
+
+            Task thirdTask = ConsoleAfterDelayAsync("Task 3", 50);
+
+
+            await secondTask;
             await firstTask;
             Console.WriteLine("After the task was created");
+            await thirdTask;
+        }
+
+        static void ConsoleAfterDelay(String text, int delayTime)
+        {
+            Thread.Sleep(delayTime);
+            Console.WriteLine(text);
+        }
+
+        static async Task ConsoleAfterDelayAsync(String text, int delayTime)
+        {
+            await Task.Delay(delayTime);
+            Console.WriteLine(text);
         }
 
     }
