@@ -792,7 +792,7 @@
     "videoCard": "O'Kon, Hagenes and Bashirian"
   },
   {
-    "ComputerId": 100,
+    "computerId": 100,
     "motherboard": "Gabtune",
     "hasWifi": false,
     "hasLTE": false,
