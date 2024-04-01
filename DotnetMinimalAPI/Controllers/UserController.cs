@@ -1,4 +1,5 @@
 ﻿using DotnetMinimalAPI.Data;
+using DotnetMinimalAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotnetMinimalAPI.Controllers
@@ -19,20 +20,41 @@ namespace DotnetMinimalAPI.Controllers
             return _dapper.LoadDataSingle<DateTime>("SELECT GETDATE()");
         }
 
-        [HttpGet("GetUsers/{testValue}")]
+        [HttpGet("GetUsers")]
         //public IActionResult Test()
-        public string[] GetUsers(string testValue)
+        public IEnumerable<User> GetUsers()
         {
-            string[] responseArray = new string[]
-            {
-                "test1",
-                "test2",
-                testValue,
-            };
+            string sql = @"
+                SELECT [UserId]
+                        ,[FirstName]
+                        ,[LastName]
+                        ,[Email]
+                        ,[Gender]
+                        ,[Active]
+                FROM [DotNetCourseDatabase].[TutorialAppSchema].[Users]
+            ";
 
+            IEnumerable<User> users = _dapper.LoadData<User>(sql);
+            return users;
+        }
 
+        [HttpGet("GetSingleUser/{userId}")]
+        //public IActionResult Test()
+        public User GetSingleUser(int userId)
+        {
+            string sql = $@"
+                SELECT [UserId]
+                        ,[FirstName]
+                        ,[LastName]
+                        ,[Email]
+                        ,[Gender]
+                        ,[Active]
+                FROM [DotNetCourseDatabase].[TutorialAppSchema].[Users]
+                WHERE UserId = {userId}
+            ";
 
-            return responseArray;
+            User user = _dapper.LoadDataSingle<User>(sql);
+            return user;
         }
     }
 }
