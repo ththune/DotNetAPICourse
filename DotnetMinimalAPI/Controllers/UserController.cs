@@ -1,6 +1,9 @@
 ﻿using DotnetMinimalAPI.Data;
 using DotnetMinimalAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Reflection;
+using System;
 
 namespace DotnetMinimalAPI.Controllers
 {
@@ -81,9 +84,31 @@ namespace DotnetMinimalAPI.Controllers
         }
 
         [HttpPost("AddUser")]
-        public IActionResult AddUser()
+        public IActionResult AddUser(User user)
         {
-            return Ok();
+            string sql = $@"
+                INSERT INTO TutorialAppSchema.Users(
+                    [FirstName],
+                    [LastName],
+                    [Email],
+                    [Gender],
+                    [Active]
+                ) VALUES(
+                    '{user.FirstName}'
+                    , '{user.LastName}'
+                    , '{user.Email}'
+                    , '{user.Gender}'
+                    , '{user.Active}'
+                )";
+
+            Console.WriteLine(sql);
+
+            if (_dapper.ExecuteSql(sql))
+            {
+                return Ok();
+            }
+
+            throw new Exception("Failed to add user");
         }
     }
 }
