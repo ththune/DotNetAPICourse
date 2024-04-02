@@ -21,7 +21,6 @@ namespace DotnetMinimalAPI.Controllers
         }
 
         [HttpGet("GetUsers")]
-        //public IActionResult Test()
         public IEnumerable<User> GetUsers()
         {
             string sql = @"
@@ -55,6 +54,36 @@ namespace DotnetMinimalAPI.Controllers
 
             User user = _dapper.LoadDataSingle<User>(sql);
             return user;
+        }
+
+        [HttpPut("EditUser")]
+        public IActionResult EditUser(User user)
+        {
+            string sql = $@"
+                UPDATE TutorialAppSchema.Users
+                SET 
+                    [FirstName] = '{user.FirstName}'
+                    ,[LastName] = '{user.LastName}'
+                    ,[Email] = '{user.Email}'
+                    ,[Gender] = '{user.Gender}'
+                    ,[Active] = '{user.Active}'
+                WHERE UserId = {user.UserId}";
+
+            Console.WriteLine(sql);
+
+            if (_dapper.ExecuteSql(sql))
+            {
+                return Ok();
+            }
+
+            throw new Exception("Failed to update user");
+
+        }
+
+        [HttpPost("AddUser")]
+        public IActionResult AddUser()
+        {
+            return Ok();
         }
     }
 }
