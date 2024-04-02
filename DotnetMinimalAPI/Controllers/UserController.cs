@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Reflection;
 using System;
+using DotnetMinimalAPI.DTOs;
 
 namespace DotnetMinimalAPI.Controllers
 {
@@ -84,7 +85,7 @@ namespace DotnetMinimalAPI.Controllers
         }
 
         [HttpPost("AddUser")]
-        public IActionResult AddUser(User user)
+        public IActionResult AddUser(UserToAddDto user)
         {
             string sql = $@"
                 INSERT INTO TutorialAppSchema.Users(
