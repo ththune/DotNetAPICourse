@@ -110,7 +110,7 @@ namespace DotnetMinimalAPI.Controllers
                 return Ok();
             }
 
-            throw new Exception("Failed to update user");
+            throw new Exception("Failed to delete user");
         }
     }
 }
