@@ -1,4 +1,5 @@
 using DotnetAPI.Data;
+using SwaggerThemes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseCors("DevCors");
     app.UseSwagger();
+    app.UseSwaggerThemes(Theme.Dracula);
     app.UseSwaggerUI();
 }
 else
