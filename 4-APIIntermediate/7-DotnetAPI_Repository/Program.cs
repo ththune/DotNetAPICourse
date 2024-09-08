@@ -37,7 +37,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseCors("DevCors");
     app.UseSwagger();
-    app.UseSwaggerThemes(Theme.Dracula);
+    app.UseSwaggerThemes(Theme.Monokai);
     app.UseSwaggerUI();
 }
 else
